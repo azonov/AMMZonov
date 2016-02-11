@@ -9,6 +9,14 @@
  * Закомитить изменения
  * Проверить что изменения появились в git (например на этом сайте)
 
+### Полезности:
+
+ * Почему, зачем и за что : [Почему Git](http://habrahabr.ru/post/104198/)
+
+ * Как все настроить и с чем его есть: [Инструкция](http://dev.call2ru.com/vs/Работа%20с%20Git.pdf)
+
+ * Программа, которой пользовался я на лабораторной [SourceTree](https://www.sourcetreeapp.com)
+
 Немного когда! :+1:
 ```C++
 struct movies_t {
@@ -24,8 +32,3 @@ struct friends_t {
 
 friends_t * pfriends = &charlie;
 ```
-
- * Почему, зачем и за что : [Почему Git](http://habrahabr.ru/post/104198/)
-
- * Как все настроить и с чем его есть: [Инструкция](http://dev.call2ru.com/vs/Работа%20с%20Git.pdf)
-Программа, которой пользовался я на лабораторной [SourceTree](https://www.sourcetreeapp.com)
