@@ -1,55 +1,55 @@
-// ConsoleApplication8.cpp: определяет точку входа для консольного приложения.
-//
 
-// ConsoleApplication8 - не есть читабельное название вашей лабораторной
-#include "stdafx.h”//Желательно создавать пустой проект, чтобы этот хедер был не обязательным
+
 #include <iostream>
-using namespace std;//Зачем сначала подключать все пространство имен а потом отдельно cin сout, достаточно только отдельные подключения либо сразу все и то и то не имеет смысла
-using std::cin;
-using std::cout;
-using std::endl;
-
-#include <stdio.h>//Зачем?
-#include <conio.h>//Зачем?
-#include <cmath>//Зачем?
-#include <string.h>//Зачем?
+using namespace std;
 
 struct student
 {
-	char familia[10];//В Великобритании самую длинную фамилию носил Толлмаш-Толлмаш де Ореллана-Плантагенет-Толлмаш-Толлмаш, не будем же мы его оставлять без шансов зарегистрироваться в системе :-) 
+	char familia[100];
 	int ocenkamat;
 	int ocenkafiz;
 	int ocenkainf;
+	int schetchik;
 };
-//Вся программа без коментариев и не включен русский текст в консоли
+
 int main()
 {
-	int n, k;//не паскаль, можно k определить перед использованием
-	cout << "Введите количество студентов \n “;//Разношерстность вывода, здесь \n там endl, приведите к одному стилю
+	setlocale(LC_ALL, "Russian");
+	int n;
+	cout << "Введите количество студентов \n “;
 	cin >> n;
-	student* stud = new student[n];//чтобы не уродовать слово студент и подобные принято структуры печатать в CamelCase с большой буквы
-// stud  сущ. жеребец (о мужчине); альфонс; распорка; племенной жеребец; платный любовник; пуговица; заклёпка (Thamior);
+	student* stud = new student[n];
+
 	cout << "Введите данные о студентах \n ";
 	for (int i = 0; i<n; i++)
 	{
-		cout << "   фамилия: " << endl;
+		stud[i].schetchik = 0;
+		cout << "   фамилия: " << "\n";
 		cin >> stud[i].familia;
-		cout << "   оц.мат: " << endl;
+		cout << "   оц.мат: " << "\n";
 		cin >> stud[i].ocenkamat;
-		cout << "   оц.физика: " << endl;
+		cout << "   оц.физика: " << "\n";
 		cin >> stud[i].ocenkafiz;
-		cout << "   оц.инф: " << endl;
+		cout << "   оц.инф: " << "\n";
 		cin >> stud[i].ocenkainf;
-		//cout << " \n “;//не нужно оставлять закоментированные строки в системах контроля версий :-)
-	}
-	cout << endl;
-	k = 0;
+		if ((stud[i].ocenkamat >= 4) && (stud[i].ocenkafiz >= 4) && (stud[i].ocenkainf >= 4))
+		{
+			if (stud[i].ocenkamat==5)
+			     stud[i].schetchik++;
+			if (stud[i].ocenkafiz == 5)
+		         stud[i].schetchik++;
+			if (stud[i].ocenkainf == 5)
+			     stud[i].schetchik++;
+		}
+    }
+	cout << "\n";
+	int k = 0;
 	for (int i = 0; i<n; i++)
 	{
-//чтобы не образовывать бесконечные if переделайте на счетчик количества оценок, можно счетчик добавить в структуру студент.
-		if (((stud[i].ocenkamat == 4) && (stud[i].ocenkafiz == 5) && (stud[i].ocenkainf == 5)) || ((stud[i].ocenkamat == 5) && (stud[i].ocenkafiz == 4) && (stud[i].ocenkainf == 5)) || ((stud[i].ocenkamat == 5) && (stud[i].ocenkafiz == 5) && (stud[i].ocenkainf == 4)))
+
+		if (stud[i].schetchik==2)
 		{
-			k = k + 1;//k++ 
+			 k++; 
 			cout << stud[i].familia << " \n ";
 		}
 	}
