@@ -1,8 +1,8 @@
 // лаба1.cpp : Defines the entry point for the console application.
 //
 
-// ConsoleApplication9.cpp: определяет точку входа для консольного приложения.
 //
+//foundEngineer.cpp: oпределяет точку входа для консольного приложения.
 
 #include "stdafx.h"
 #include <iostream>
@@ -13,7 +13,7 @@ struct workers
 {
 	char fname [30];
 	int age;
-	char specialty[30];
+	char specialty[30]; 
 	int salary;
 };
 
@@ -37,40 +37,41 @@ int main()
 		count_workers=count_workers+count;
 	}
 	char c; //для считывания символов
-	workers *a= new workers [count_workers];
+	workers *work= new workers [count_workers]; 
 	for (int i = 0; i < count_workers; i++)
 	{
-		cin.getline( a[i].fname, 30);
-		cin>>a[i].age;
-		cin.getline( a[i].specialty, 30);
-		cin>>a[i].salary;
+		cin.getline( work[i].fname, 30);
+		cin>>work[i].age;
+		cin.getline( work[i].specialty, 30);
+		cin>>work[i].salary;
 	}
 	char eng [30] = "engineer"; count=0;
 	for (int i = 0; i < count_workers; i++)
 	{
-		if (strcmp(a[i].fname, eng) == 0)
-			count++
+		if (strcmp(work[i].fname, eng) == 0)
+			count++;
 	}
-	engineer *b= new engineer[count];
+	engineer *engin= new engineer[count]; 
 	int j=0;
 	for (int i = 0; i < count_workers; i++)
 	{
-		if (strcmp(a[i].fname, eng) == 0)
+		if (strcmp(work[i].fname, eng) == 0)
 		{
-			strcpy (b[j].fnameE, a[i].fname);
-			b[j].ageE=a[i].age;
-			strcpy (b[j].specialtyE, a[i].specialty);
-			b[j].salaryE=a[i].salary;
+			strcpy (engin[j].fnameE, work[i].fname);
+			engin[j].ageE=work[i].age;
+			strcpy (engin[j].specialtyE, work[i].specialty);
+			engin[j].salaryE=work[i].salary;
 		}
 		j++;
 	}
 	for (int i=0; i<j; i++)
 	{
-		cout<<b[i].fnameE;
-		cout<<b[i].ageE;
-		cout<<b[i].specialtyE;
-		cout<<b[i].salaryE;
+		cout<<engin[i].fnameE;
+		cout<<engin[i].ageE;
+		cout<<engin[i].specialtyE;
+		cout<<engin[i].salaryE;
 	}
 
 	system("pause");
+	return 0;
 }
