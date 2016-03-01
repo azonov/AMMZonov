@@ -1,4 +1,6 @@
+#include "stdafx.h"
 #include <iostream>
+#include <windows.h>
 using namespace std;
 
 struct student
@@ -14,26 +16,29 @@ struct student
 
 int main()
 {   
-	setlocale(LC_ALL, "Russian");
+	SetConsoleCP(1251);
+	SetConsoleOutputCP(1251);
+
 	int n;
-	cout << "Введите количество студентов \n “;
+	cout << "Введите кол-во студентов: \n ";
 		cin >> n;
 	
 		student* infstud = new student[n];
-		cout << "Введите данные о студентах \n ";
+		cout << "Введите данные о студентах: \n ";
 	for (int i = 0; i<n; i++)
 	{
 		infstud[i].schetchik = 0;
-		cout << "   фамилия: " << "\n";
+		cout << "Фамилия: " << "\n";
 		cin >> infstud[i].familia;
-		cout << "   оц.мат: " << "\n";
+		cout << "Оцента по мат.: " << "\n";
 		cin >> infstud[i].ocenkamat;
-		cout << "   оц.физика: " << "\n";
+		cout << "Оценка по физике: " << "\n";
 		cin >> infstud[i].ocenkafiz;
-		cout << "   оц.инф: " << "\n";
+		cout << "Оценка по информатике: " << "\n";
 		cin >> infstud[i].ocenkainf;
 		}
-	
+	for (int i=0; i<n; i++)
+	{
 	if ((infstud[i].ocenkamat >= 4) && (infstud[i].ocenkafiz >= 4) && (infstud[i].ocenkainf >= 4))
 	 {
 		if (infstud[i].ocenkamat == 5)
@@ -43,8 +48,7 @@ int main()
 		if (infstud[i].ocenkainf == 5)
 			 infstud[i].schetchik++;
 		}
-	
-}
+	}
 cout << "\n";
 int k = 0;
 for (int i = 0; i<n; i++)
@@ -56,3 +60,7 @@ for (int i = 0; i<n; i++)
 	}
 }
 
+cin.get();
+cin.get();
+
+}
