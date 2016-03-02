@@ -29,10 +29,10 @@ void main()
                  cartoteca[j+1].price = temp;
 				 string tempstr = cartoteca[j].title;
                  cartoteca[j].title = cartoteca[j+1].title;
-                 cartoteca[j+1].title = temp;
+                 cartoteca[j+1].title = tempstr;
 				 tempstr = cartoteca[j].producer;
                  cartoteca[j].producer = cartoteca[j+1].producer;
-                 cartoteca[j+1].producer = temp;
+                 cartoteca[j+1].producer = tempstr;
              }
          }
      }
