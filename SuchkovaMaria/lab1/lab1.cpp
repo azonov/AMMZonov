@@ -1,13 +1,18 @@
 #include "stdafx.h"
 #include <iostream>
 using namespace std;
-#include <string>;
+#include <string>
+#include <algorithm>
 struct film {
 	string title;
 	int price;
 	string producer;
 };
-void main()
+bool filmsort(film a, film b)
+{
+    return a.price<b.price;
+}
+int main()
 {
 	int n;
 	cout << "Enter the number of movies " << "\n";
@@ -21,22 +26,9 @@ void main()
 		cout << "Enter producer " << "\n";
 		cin >> cartoteca[i].producer;
 	}
-	for (int i = 0; i < n-1; i++) {
-         for (int j = 0; j < n-i-1; j++) {
-             if (cartoteca[j].price > cartoteca[j+1].price) {
-                 int temp = cartoteca[j].price;
-                 cartoteca[j].price = cartoteca[j+1].price;
-                 cartoteca[j+1].price = temp;
-				 string tempstr = cartoteca[j].title;
-                 cartoteca[j].title = cartoteca[j+1].title;
-                 cartoteca[j+1].title = tempstr;
-				 tempstr = cartoteca[j].producer;
-                 cartoteca[j].producer = cartoteca[j+1].producer;
-                 cartoteca[j+1].producer = tempstr;
-             }
-         }
-     }
+	sort(cartoteca, cartoteca+n, filmsort);
 	for (int i=0; i<n; i++)
 		cout << cartoteca[i].title << ' ' << cartoteca[i].price << ' ' << cartoteca[i].producer << "\n";
 	system ("pause");
+	return 0;
 }
