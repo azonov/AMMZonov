@@ -38,7 +38,7 @@ int main ()
 
 	for (int i=0; i<n; i++) { 
 
-		if (p[i].sex='ì') { 
+		if (p[i].sex=='ì') { 
 			man=man+p[i].year; 
 			kman=kman+1; 
 		} else 
@@ -67,7 +67,7 @@ int main ()
 
 	for (int i=0; i<n; i++) {
 
-		if (p[i].sex='ì') 
+		if (p[i].sex=='ì') 
 		{ 
 			if (p[i].year > eagman) 
 			{ 
