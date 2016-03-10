@@ -21,6 +21,7 @@
 
 Подсказка по выполнению второго задания:
 Для подсчета времени выполнения можно посчитать разницу во времени до начала выполнения блока кода и после
+```C++
 	clock_t start;
 	clock_t stop;
 	start = clock();
@@ -31,3 +32,4 @@
 	stop = clock();
 	double time = double(stop - start) / CLOCKS_PER_SEC;
 	cout<<"time :"<<time<<endl;
+```
