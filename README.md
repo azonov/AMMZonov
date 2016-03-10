@@ -1,7 +1,7 @@
 # ![Awesome](http://www.amm.vsu.ru/images/logo.gif?raw=true) AMM
 
 ### Для коммита в данный репозиторий необходимо скинуть username!
-### Напоминаю, что первую лабораторную работу можно сдать до 3 марта!
+### Результаты первой лабораторной отмечены в файле с заданиями. Срок сдачи второй лабораторной до 31 марта включительно.
 
 Репозиторий 1 курса. 
 
@@ -19,18 +19,15 @@
 
  * Программа, которой пользовался я на лабораторной [SourceTree](https://www.sourcetreeapp.com)
 
-Немного когда! :+1:
-```C++
-struct movies_t {
-  string title;
-  int year;
-};
-
-struct friends_t {
-  string name;
-  string email;
-  movies_t favorite_movie;
-} charlie, maria;
-
-friends_t * pfriends = &charlie;
-```
+Подсказка по выполнению второго задания:
+Для подсчета времени выполнения можно посчитать разницу во времени до начала выполнения блока кода и после
+	clock_t start;
+	clock_t stop;
+	start = clock();
+	for (int i = 0; i < 1000; ++i)
+	{
+        cout << "Example operation";
+	}
+	stop = clock();
+	double time = double(stop - start) / CLOCKS_PER_SEC;
+	cout<<"time :"<<time<<endl;
