@@ -26,8 +26,8 @@
 	clock_t stop;
 	start = clock();
 	for (int i = 0; i < 1000; ++i)
-	{
-        cout << "Example operation";
+    {
+        cout << "Random number : " << rand() % n;
 	}
 	stop = clock();
 	double time = double(stop - start) / CLOCKS_PER_SEC;
