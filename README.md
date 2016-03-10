@@ -32,4 +32,5 @@
 	stop = clock();
 	double time = double(stop - start) / CLOCKS_PER_SEC;
 	cout<<"time :"<<time<<endl;
+    cin.get();
 ```
