@@ -10,7 +10,7 @@ void count(int *array, int num, int min_value, int max_value){
 	for(int i = 0; i < num; i++) temp[array[i]]++;
 	int k=0;
 	for(int i = min_value; i <= max_value; i++)
-		for(int j = 0; j<=temp[i]; j++){
+		for(int j = 1; j<=temp[i]; j++){
 			array[k]=i;
 			k++;
 		}
@@ -24,8 +24,7 @@ void count(int *array, int num, int min_value, int max_value){
 	delete []temp;
 }
 void selection(int *array, int num){
-	clock_t start;
-    clock_t stop;
+	clock_t start, stop;
     start = clock();
 	int temp;
     for(int i = 0; i < num; i++)
@@ -64,6 +63,7 @@ void main()
 		mas[i]=rand()%(max-min+1)-min;
 		cout<<mas[i]<<" ";
 	}
+	cout<<"\n";
 	count(mas, n, min, max);
 	selection(mas,n);
 	delete[]mas;
