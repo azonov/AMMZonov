@@ -6,11 +6,14 @@ void count(int *array, int num, int min_value, int max_value){
 	clock_t start, stop;
     start = clock();        
 	int *temp = new int[max_value-min_value+1];
-	for(int i = min_value; i <= max_value; i++) temp[i - min_value] = 0;
-	for(int i = 0; i < num; i++) temp[array[i] - min_value]++;
+	for(int i = min_value; i <= max_value; i++) temp[i] = 0;
+	for(int i = 0; i < num; i++) temp[array[i]]++;
+	int k=0;
 	for(int i = min_value; i <= max_value; i++)
-		for(int j = temp[i - min_value]; j--;)
-			*array++ = i;
+		for(int j = 0; j<=temp[i]; j++){
+			array[k]=i;
+			k++;
+		}
 	stop = clock();
 	double time = double(stop - start) / CLOCKS_PER_SEC;
 	cout<<"The result of sort in ascending order: ";
@@ -31,7 +34,7 @@ void selection(int *array, int num){
         temp = array[i];
         for(int j = i + 1; j < num; ++j)
         {
-            if (array[j] < temp) 
+            if (array[j] > temp) 
            {
                pos = j; 
                temp = array[j]; 
@@ -48,14 +51,15 @@ void selection(int *array, int num){
 	cout<<"\n"<<"Type of sort: selection sort"<<"\n";
     cout<<"Time: "<<time;
 }
-int main()
+void main()
 {
 	int n;
 	cout<<"Enter size of array"<<"\n";
 	cin>>n;
 	int *mas = new int [n];
+	srand(time(0));
 	cout<<"Random array: ";
-	int min=1, max=500;
+	int min=0, max=500;
 	for (int i=0; i<n; i++){
 		mas[i]=rand()%(max-min+1)-min;
 		cout<<mas[i]<<" ";
@@ -63,6 +67,6 @@ int main()
 	count(mas, n, min, max);
 	selection(mas,n);
 	delete[]mas;
-	return 0;
+	system ("pause");
 }
 
