@@ -101,7 +101,7 @@ int main()
 			else k=0;
 			i++;
 		}
-		if (k=0||open!=close)
+		if (k==0||open!=close)
 			cout<<"Wrong information";
 		else
 			cout<<Calclulation(str);
