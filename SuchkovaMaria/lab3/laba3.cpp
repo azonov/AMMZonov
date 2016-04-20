@@ -4,6 +4,8 @@ using namespace std;
 #include "iostream"
 using namespace std;
 #include "string"
+int CalculationParenthesis(string, int);
+int Factorial(int);
 int Calclulation(string s){
 	int result=0, i=s.length(), k=1, number=0,c;
 	while (i>=0){
@@ -70,9 +72,9 @@ int CalculationParenthesis(string s, int i){
 				res+=number;
 			else 
 				res-=number;
-			return res;
 		}
 	}
+	return res;
 }
 int Factorial(int n){
 	int f=1;
@@ -82,31 +84,33 @@ int Factorial(int n){
 }
 int main()
 {
-	cout<<"Enter the name of the file";
-	string filename;
-	cin>>filename;
-	ifstream fin("filename");
-	if (fin.is_open())
-	{
+	//cout<<"Enter the name of the file"<<"\n";
+	//string filename;
+	//cin>>filename;
+	//ifstream fin;
+	//fin.open("filename");
+	//if (fin.is_open())
+	//{
 		string str;
-		fin>>str;
-		int i=0,k=1,open=0,close=0;
+		//fin>>str;
+		cin>>str;
+		int i=0,k=1,p_open=0,p_close=0;
 		while (str[i]!='\0'&&k)
 		{
 			if ((str[i]>='0'&&str[i]<='9')||str[i]=='('||str[i]==')'||str[i]=='+'||str[i]=='-'||str[i]=='!')
 			{
-				if (str[i]=='(') open++;
-				if (str[i]==')') close++;
+				if (str[i]=='(') p_open++;
+				if (str[i]==')') p_close++;
 			}
 			else k=0;
 			i++;
 		}
-		if (k==0||open!=close)
-			cout<<"Wrong information";
+		if (k==0||p_open!=p_close)
+			cout<<"\n"<<"Wrong information";
 		else
-			cout<<Calclulation(str);
-	}	
-	else cout <<"File not found";
-	fin.close();
+			cout<<"\n"<<Calclulation(str);
+	//}	
+	//else cout<<"\n" <<"File not found"<<"\n";
+	//fin.close();
 	system("pause");
 }
