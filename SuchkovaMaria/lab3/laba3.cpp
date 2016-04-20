@@ -1,17 +1,16 @@
 #include "stdafx.h"
 #include "fstream"
-using namespace std;
 #include "iostream"
 using namespace std;
 #include "string"
 int CalculationParenthesis(string, int);
 int Factorial(int);
 int Calclulation(string s){
-	int result=0, i=s.length(), k=1, number=0,c;
+	int result=0, i=s.length()-1, k=1, number=0,c;
 	while (i>=0){
 		if (s[i]>='0'&&s[i]<='9'){
 			while (s[i]>='0'&&s[i]<='9'){
-				c=s[i];
+				c=s[i]-'0';
 				number+=k*c;
 				k*=10;
 				i--;
@@ -31,6 +30,7 @@ int Calclulation(string s){
 			}
 			else
 				if (s[i]=='!')
+				i--;
 					if (s[i-1]==')'){
 						i--;
 						result+=Factorial(CalculationParenthesis(s,i));
@@ -41,7 +41,7 @@ int Calclulation(string s){
 					else{
 						number=0;k=1;
 						while (s[i]>='0'&&s[i]<='9'){
-							c=s[i];
+							c=s[i]-'0';
 							number+=k*c;
 							k*=10;
 							i--;
@@ -63,7 +63,7 @@ int CalculationParenthesis(string s, int i){
 		{
 			number=0;k=1;
 			while (s[i]>='0'&&s[i]<='9'){
-				c=s[i];
+				c=s[i]-'0';
 				number+=k*c;
 				k*=10;
 				i--;
@@ -95,15 +95,14 @@ int main()
 		//fin>>str;
 		cin>>str;
 		int i=0,k=1,p_open=0,p_close=0;
-		while (str[i]!='\0'&&k)
+		for(int j=0;j<str.length();j++)
 		{
-			if ((str[i]>='0'&&str[i]<='9')||str[i]=='('||str[i]==')'||str[i]=='+'||str[i]=='-'||str[i]=='!')
+			if ((str[j]>='0'&&str[j]<='9')||str[j]=='('||str[j]==')'||str[j]=='+'||str[j]=='-'||str[j]=='!')
 			{
-				if (str[i]=='(') p_open++;
-				if (str[i]==')') p_close++;
+				if (str[j]=='(') p_open++;
+				if (str[j]==')') p_close++;
 			}
 			else k=0;
-			i++;
 		}
 		if (k==0||p_open!=p_close)
 			cout<<"\n"<<"Wrong information";
