@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <Windows.h>
+
+using namespace std;
+
+struct SPORTSMAN
+{
+	string FIO;
+	int position[5];
+	SPORTSMAN(){;}
+	void read(string FIO_, int position_[])
+	{
+		FIO=FIO_;
+		for (int i=0; i<5; i++)
+			position[i]=position_[i];
+	}
+
+};
+
+const string  Kind_Sport[5] = {"Конкур", "Фехтование", "Стрельба", "Бег", "Плавание"};
+
+void read_array (SPORTSMAN *&a, int size)
+{
+	a = new SPORTSMAN[size];
+	for (int i=0; i<size; i++)
+	{
+		cout << "\nСпортсмен_" << i+1 << ":\n";
+		cout << "Фамилия: ";
+		string FIO_;
+		cin >> FIO_;
+		cout << "Места: ";
+		int pos[5];
+		for (int j=0; j<5; j++)
+			cin >> pos[j];
+		a[i].read(FIO_,pos);
+	}
+}
+
+void print_result (SPORTSMAN *a, int size)
+{
+	for (int i=0; i<size; i++)
+	{
+		bool print_FIO=false;
+		for (int j=0; j<5; j++)
+		{
+			if (a[i].position[j]==1)
+			{
+				if (!print_FIO)
+				{
+					cout << endl << a[i].FIO << endl;
+					print_FIO=true;
+				}
+				cout << Kind_Sport[j] << ": 1 место\n";
+			}
+		}
+	}
+}
+
+int main()
+{
+	SetConsoleOutputCP(1251);
+	SetConsoleCP(1251);
+	cout << "Введите кол-во спротсменов: ";
+	int size;
+	cin >> size;
+	SPORTSMAN *a;
+	read_array (a, size);
+
+	cout << "\nРезультаты соревнований:\n";
+	print_result (a, size);
+
+	delete []a;
+	cin.ignore().get();
+	return 0;
+}
