@@ -1,0 +1,135 @@
+#include <iostream>
+#include <Windows.h>
+#include <ctime>
+#include <iomanip>
+
+using namespace std;
+
+void create_random_array (int *&a, int size)
+{
+	srand(GetTickCount()); // srand(time(0));
+	a = new int[size];
+	for (int i=0; i<size; i++)
+		a[i]=rand()%1000;
+}
+
+void create_gess_array (int *&a, int size)
+{
+	srand(GetTickCount());
+	a = new int[size];
+	a[0]=rand()%100;
+	for (int i=1; i<size; i++)
+		a[i]=a[i-1]+rand()%100;
+}
+
+void create_less_array (int *&a, int size)
+{
+	srand(GetTickCount());
+	a = new int[size];
+	a[0]=rand()%1000;
+	for (int i=1; i<size; i++)
+		a[i]=a[i-1]-rand()%100;
+}
+
+void print_array (int *a, int size)
+{
+	for (int i=0; i<size; i++)
+		cout << a[i] << ' ';
+	cout << endl;
+}
+
+
+void copy_array (int *a, int *&copy_a, int size)
+{
+	copy_a = new int[size];
+	for (int i=0; i<size; i++)
+		copy_a[i]=a[i];
+
+}
+void swap (int &x, int &y)
+{
+	int tmp=x;
+	x=y;
+	y=tmp;
+}
+
+void choice_sort (int *a, int size)
+{
+	for (int right=size-1; right>0; right--)
+	{
+		int imax=0;
+		for (int i=1; i<=right; i++)
+			if (a[i]>=a[imax])
+				imax=i;
+		if (imax!=right)
+			swap(a[imax],a[right]);
+	}
+}
+
+void my_sort (int *a, int size)
+{
+	for (int count=0; count<size/2; count++)
+	{
+		int imin=count;
+		int imax=count;
+		for (int i=count+1; i<size-count; i++)
+			if (a[i]>=a[imax]) imax=i;
+			else
+				if (a[i]<a[imin]) imin=i;
+		if (imin!=count) swap(a[imin],a[count]);
+		if (imax==count) imax=imin;
+		if (imax!=size-1-count) swap(a[imax],a[size-1-count]);
+	}
+}
+
+
+int main()
+{
+	SetConsoleOutputCP(1251);
+	int *a, *copy_a;
+	int *b, *copy_b;
+	int *c, *copy_c;
+	int size;
+	cout << "Введите количество элементов: ";
+	cin >> size;
+
+	create_random_array(a,size);
+	copy_array(a,copy_a,size);
+
+	create_gess_array(b,size);
+	copy_array(b,copy_b,size);
+
+	create_less_array(c,size);
+	copy_array(c,copy_c,size);
+
+	//print_array(b,size);
+	double t1=((float)clock()) / CLOCKS_PER_SEC;
+	choice_sort(a,size);
+	double t2=((float)clock()) / CLOCKS_PER_SEC;
+	my_sort(copy_a,size);
+	double t3=((float)clock()) / CLOCKS_PER_SEC;
+
+	choice_sort(b,size);
+	double t4=((float)clock()) / CLOCKS_PER_SEC;
+	my_sort(copy_b,size);
+	double t5=((float)clock()) / CLOCKS_PER_SEC;
+	
+	choice_sort(c,size);
+	double t6=((float)clock()) / CLOCKS_PER_SEC;
+	my_sort(copy_c,size);
+	double t7=((float)clock()) / CLOCKS_PER_SEC;
+	
+	cout << endl;
+	cout << '\t' << '\t' << "случайный" << '\t' << "возрастающий" << '\t' << "убывающий" << endl;
+	cout << "Простой выбор" << "\t " << t2-t1 << " сек." << "\t " << t4-t3 << " сек." << "\t " << t6-t5 << " сек."<< endl;
+	cout << "Двойной выбор" << "\t " << setprecision(4) << t3-t2 << " сек." << "\t " << setprecision(4) << t5-t4 << " сек." << "\t " << setprecision(4) << t7-t6 << " сек."<< endl;
+
+	delete [] a;
+	delete [] copy_a;
+	delete [] b;
+	delete [] copy_b;
+	delete [] c;
+	delete [] copy_c;
+
+	cin.ignore().get();
+}
