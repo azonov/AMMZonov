@@ -1,0 +1,85 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include <Windows.h>
+
+using namespace std;
+
+void QSort (vector<int> &arr, short left, short right);
+
+
+int main()
+{
+	SetConsoleOutputCP(1251);
+	ifstream fin;
+	bool error_open=false;
+	do
+	{
+		cout << "Введите имя файла: ";
+		string fin_name;
+		cin >> fin_name;
+		fin.open(fin_name);
+		error_open = !fin.is_open();
+		if (error_open) cout << "Файл не найден!\n";
+	} while(error_open); 		
+	
+	vector<int> a;
+	bool not_only_numbers=false;
+	while (!fin.eof() && !not_only_numbers)
+	{
+		char number[50];
+		fin.getline(number, 50, ',');
+		if (strlen(number)!=0)
+		{
+			char *end_ptr;
+			long value = strtol(number, &end_ptr, 10);
+			if (*end_ptr)
+			{
+				not_only_numbers=true;
+			}
+			else
+				a.push_back(value);
+		}
+	}
+	if (not_only_numbers)
+		cout << "В файле не только числа!!!";
+	else
+	{
+		// сортировка
+		QSort(a,0,a.size()-1);
+		ofstream fout("results.txt");
+		for (int i=0; i<a.size(); i++)
+			fout << a[i] << endl;
+		fout.close();
+		cout << "Файл создан!";
+	}
+
+	fin.close();
+	cin.ignore().get();
+	return 0;
+}
+
+void QSort (vector<int> &arr, short left, short right)
+{
+	int i=left, j=right;
+	int x=arr[(left+right)/2]; // опорный элемент 
+	do
+	{
+		while (arr[i]<x)
+			i++;
+		while (arr[j]>x)
+			j--;
+		if (i<=j)
+		{
+			if (arr[i]!=arr[j])
+				swap(arr[i],arr[j]);
+			i++;
+			j--;
+		}
+	}while (i<=j);
+	if (left<j)
+		QSort(arr,left,j);
+	if (i<right)
+		QSort(arr,i,right);
+}
