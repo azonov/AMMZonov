@@ -1,0 +1,134 @@
+#include <iostream>
+#include <Windows.h>
+
+using namespace std;
+
+struct LIST
+{
+	int info;   
+	LIST *next; 
+};
+
+typedef LIST * PLIST;
+
+
+void Init (PLIST & head)
+{
+	head = new LIST;
+	head->next = head; 
+}
+
+
+bool Empty (PLIST head)
+{
+	return head->next == head;
+}
+
+
+void Add_after_Q (PLIST Q, int new_elem)
+{
+	PLIST p = new LIST;
+	p->next = Q->next;
+	p->info = new_elem;
+	Q->next = p;
+}
+
+
+void Del_after_Q (PLIST Q)
+{
+	PLIST p = Q->next;
+	Q->next = p->next;
+	delete p;
+}
+
+
+void Create (PLIST head)
+{
+	PLIST p = head;
+	srand(GetTickCount());
+	
+	for (int i = 1; i<=7; i++)
+	{
+		Add_after_Q(p,rand()%100);
+		p = p->next;
+	}
+}
+
+
+void Print (PLIST head)
+{
+	PLIST p = head->next;
+	while (p != head)
+	{
+		cout << p->info << " ";
+		p = p->next;
+	}
+	cout << endl;
+}
+
+
+void Delete_all (PLIST &head)
+{
+	while (!Empty(head))
+	{
+		Del_after_Q(head);
+	}
+
+	delete head;
+}
+
+
+void Sort (PLIST head)
+{
+	for (PLIST left = head->next; left != head; left=left->next)
+	{
+		PLIST pmin=left;
+		for (PLIST p = left->next; p != head; p=p->next)
+			if (p->info < pmin->info) pmin = p;
+		if (left != pmin)
+		{
+			int tmp = pmin->info;
+			pmin->info = left->info;
+			left->info = tmp;
+		}
+	}
+}
+
+
+int main()
+{
+	SetConsoleOutputCP(1251);
+	
+	
+	PLIST head;
+	
+	
+	Init(head);
+	Create(head);
+
+	cout << "Исходный список:\n";
+	Print(head);
+
+	Sort(head);
+	cout << "\nУпорядоченный список:\n";
+	Print(head);
+
+	int new_elem;
+	cout << "\nВведите новый элемент: ";
+	cin >> new_elem;
+	// новый элемент добавляется в начало списка
+	Add_after_Q(head,new_elem);
+	cout << "\nCписок с новым элементом:\n";
+	Print(head);
+
+	Sort(head);
+	cout << "\nУпорядоченный список:\n";
+	Print(head);
+
+	
+	Delete_all(head);
+
+	cin.ignore().get();
+
+	return 0;
+}
